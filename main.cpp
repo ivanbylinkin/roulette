@@ -8,16 +8,24 @@
 using namespace std;
 
 // define forward declarations below
-int rouletteGen();
+int random_number();
+
+// define the struct for data
+struct data{
+	int location;
+	int frequency;
+};
 
 int main() {
-    // set up a random seed
-    srand(time(NULL));
-    
-    return 0;
+	// set up a random seed
+	srand(time(NULL));
+	// declare array of data points
+	data arr[35];
+
+	return 0;
 }
 
-int rouletteGen(){
-    // returns a random number between 0 and 35
-    return rand() % 36;
+int random_number(){
+	// returns a random number between 0 and 35
+	return rand() % 36;
 }
