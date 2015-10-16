@@ -16,18 +16,16 @@ struct data{
 // define forward declarations below
 int random_number();
 void fillMeUp(data arr[]);
-void spinMeRound(data arr[], int spins);
+void spinMeRound(data arr[], int spins, int offset);
 void displayResults(data arr[], int spins);
 void testingRoulette();
 void theGambler();
 
 int main() {
-	// set up a random seed
-	srand(time(NULL));
 	// launch part 1
-	//testingRoulette();
+	testingRoulette();
 	// launch part 2
-	theGambler();
+	//theGambler();
 	// stop the program and wait
 	cout << "Please press enter to continue..." << endl;
 	getchar();
@@ -43,9 +41,9 @@ void testingRoulette(){
 	fillMeUp(spin3600);
 	fillMeUp(spin36000);
 	// spin the roulette wheel
-	spinMeRound(spin36, 36);
-	spinMeRound(spin3600, 3600);
-	spinMeRound(spin36000, 36000);
+	spinMeRound(spin36, 36, 1);
+	spinMeRound(spin3600, 3600, 2);
+	spinMeRound(spin36000, 36000, 3);
 	// output the results
 	displayResults(spin36, 36);
 	displayResults(spin3600, 3600);
@@ -60,8 +58,8 @@ void theGambler(){
 	fillMeUp(spin1000);
 	fillMeUp(bets);
 	// spin the roulette wheel/fill bets with random bets
-	spinMeRound(spin1000, 1000);
-	spinMeRound(bets, 1000);
+	//spinMeRound(spin1000, 1000);
+	//spinMeRound(bets, 1000);
 	// process the results
 	int bankroll = 1000;
 	for (int i = 0; i < 35; i++){
@@ -90,7 +88,10 @@ void fillMeUp(data arr[]){
 	}
 }
 
-void spinMeRound(data arr[], int spins){
+void spinMeRound(data arr[], int spins, int offset){
+	// set up a random seed
+	srand(time(NULL)*offset);
+	// spin
 	for (int i = 0; i < spins; i++){
 		int tmp = random_number();
 		arr[tmp].frequency++;
