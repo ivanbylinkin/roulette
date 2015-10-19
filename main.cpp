@@ -25,7 +25,7 @@ int main() {
 	// launch part 1
 	testingRoulette();
 	// launch part 2
-	//theGambler();
+	theGambler();
 	// stop the program and wait
 	cout << "Please press enter to continue..." << endl;
 	getchar();
@@ -35,44 +35,52 @@ int main() {
 
 void testingRoulette(){
 	// declare array of data points
-	data spin36[35], spin3600[35], spin36000[35];
+	data spin36[35], spin360[35], spin3600[35], spin36000[35];
 	// fill the arrays with default values
 	fillMeUp(spin36);
+	fillMeUp(spin360);
 	fillMeUp(spin3600);
 	fillMeUp(spin36000);
 	// spin the roulette wheel
 	spinMeRound(spin36, 36, 1);
+	spinMeRound(spin360, 360, 7);
 	spinMeRound(spin3600, 3600, 2);
 	spinMeRound(spin36000, 36000, 3);
 	// output the results
 	displayResults(spin36, 36);
+	displayResults(spin360, 360);
 	displayResults(spin3600, 3600);
 	displayResults(spin36000, 36000);
 }
 
 void theGambler(){
-	// declare array to hold spin values
-	// also declare an array to hold bets
-	data spin1000[35], bets[35];
-	// fill the array with default values
-	fillMeUp(spin1000);
-	fillMeUp(bets);
-	// spin the roulette wheel/fill bets with random bets
-	//spinMeRound(spin1000, 1000);
-	//spinMeRound(bets, 1000);
-	// process the results
-	int bankroll = 1000;
-	for (int i = 0; i < 35; i++){
-		// find the number of wins
-		int maxWins = spin1000[i].frequency,
-		totalBets = bets[i].frequency,
-		actualWins = totalBets > maxWins ? maxWins : totalBets;
-		cout << "Total Bets Made: " << totalBets << " Total Times Number Came Up: " << maxWins << " Total Times He Wins: " << actualWins << endl;
-		// process the bank roll
-		bankroll -= totalBets; // -$1 for each bet
-		bankroll += actualWins * 35; // +$35 for each win
+	int tempspin = 0, bet = 0, bankroll = 1000;
+	for (int i = 0; i < 1000; i++){
+		tempspin = random_number();
+		bet = random_number();
+		if (tempspin == bet)
+			bankroll += 34;
+		else
+			bankroll += -1;
+			
 	}
-	cout << "After 1000 bets, the gambler has $" << bankroll << " remaining." << endl;
+	cout << "End Bankroll = " << bankroll << endl;
+	int a_tempspin = 0, a_bet = 0, total = 0, average = 0;
+	for (int n = 0; n < 1000; n++){
+		int a_bankroll = 1000;
+		for (int i = 0; i < 1000; i++){
+			a_tempspin = random_number();
+			a_bet = random_number();
+			if (a_tempspin == bet)
+				a_bankroll += 34;
+			else
+				a_bankroll += -1;
+			
+		}
+		total += a_bankroll;
+	}
+	average = total/1000;
+	cout << "The average end Bankroll = " << average << endl;
 }
 
 int random_number(){
